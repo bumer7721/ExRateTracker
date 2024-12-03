@@ -5,6 +5,10 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+# Ignore environment variable file
+.env
+env.properties
+
 ### STS ###
 .apt_generated
 .classpath
