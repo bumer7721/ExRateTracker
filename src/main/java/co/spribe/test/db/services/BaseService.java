@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface BaseService<T extends BaseEntity> {
 
+    T save(T entity);
+
     List<T> findAll();
 
 }

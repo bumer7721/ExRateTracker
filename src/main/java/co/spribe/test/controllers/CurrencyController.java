@@ -2,9 +2,9 @@ package co.spribe.test.controllers;
 
 import co.spribe.test.facades.CurrencyFacade;
 import co.spribe.test.facades.data.CurrencyDTO;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,6 +21,12 @@ public class CurrencyController {
     @GetMapping
     public List<CurrencyDTO> getCurrencies() {
         return currencyFacade.getAllCurrencies();
+    }
+
+    @PostMapping
+    public ResponseEntity<CurrencyDTO> addCurrency(@RequestBody CurrencyDTO currencyDTO) {
+        CurrencyDTO savedCurrency = currencyFacade.addCurrency(currencyDTO);
+        return new ResponseEntity<>(savedCurrency, HttpStatus.CREATED);
     }
 
 }

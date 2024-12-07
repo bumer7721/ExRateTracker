@@ -8,4 +8,5 @@ public interface CurrencyFacade {
 
     List<CurrencyDTO> getAllCurrencies();
 
+    CurrencyDTO addCurrency(CurrencyDTO currency);
 }

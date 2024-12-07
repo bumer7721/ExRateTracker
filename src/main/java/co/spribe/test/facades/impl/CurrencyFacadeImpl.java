@@ -1,5 +1,6 @@
 package co.spribe.test.facades.impl;
 
+import co.spribe.test.db.entities.Currency;
 import co.spribe.test.db.services.CurrencyService;
 import co.spribe.test.facades.CurrencyFacade;
 import co.spribe.test.facades.data.CurrencyDTO;
@@ -24,5 +25,11 @@ public class CurrencyFacadeImpl implements CurrencyFacade {
         return currencyService.findAll().stream()
                 .map(c -> modelMapper.map(c, CurrencyDTO.class))
                 .toList();
+    }
+
+    @Override
+    public CurrencyDTO addCurrency(CurrencyDTO currency) {
+        var newCurrency = currencyService.save(modelMapper.map(currency, Currency.class));
+        return modelMapper.map(newCurrency, CurrencyDTO.class);
     }
 }
