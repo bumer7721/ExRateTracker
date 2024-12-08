@@ -18,15 +18,15 @@ public class CurrencyController {
         this.currencyFacade = currencyFacade;
     }
 
-    @GetMapping
-    public List<CurrencyDTO> getCurrencies() {
-        return currencyFacade.getAllCurrencies();
-    }
-
     @PostMapping
     public ResponseEntity<CurrencyDTO> addCurrency(@RequestBody CurrencyDTO currencyDTO) {
         CurrencyDTO savedCurrency = currencyFacade.addCurrency(currencyDTO);
         return new ResponseEntity<>(savedCurrency, HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public List<CurrencyDTO> getCurrencies() {
+        return currencyFacade.getAllCurrencies();
     }
 
 }
