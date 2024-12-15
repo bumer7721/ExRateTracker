@@ -8,6 +8,8 @@ public interface BaseService<T extends BaseEntity> {
 
     T save(T entity);
 
+    List<T> saveAll(List<T> entities);
+
     List<T> findAll();
 
 }

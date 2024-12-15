@@ -16,6 +16,11 @@ public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseServi
     }
 
     @Override
+    public List<T> saveAll(List<T> entities) {
+        return getRepository().saveAll(entities);
+    }
+
+    @Override
     public List<T> findAll() {
         return getRepository().findAll();
     }
