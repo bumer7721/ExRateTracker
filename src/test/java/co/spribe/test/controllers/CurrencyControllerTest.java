@@ -7,6 +7,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -20,6 +21,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.util.List;
 
+import static org.apache.commons.lang3.math.NumberUtils.LONG_ONE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -62,6 +64,11 @@ class CurrencyControllerTest {
         postgresContainer.stop();
     }
 
+    @BeforeEach
+    public void beforeEach() {
+        currencyRepository.deleteAll();
+    }
+
     @Test
     public void shouldAddCurrency() throws Exception {
         var newCurrency = new CurrencyDTO();
@@ -79,7 +86,7 @@ class CurrencyControllerTest {
         assertThat(actualCurrency.getId()).isNotNull();
         assertThat(actualCurrency.getCode()).isEqualTo(newCurrency.getCode());
         assertThat(actualCurrency.getName()).isEqualTo(newCurrency.getName());
-
+        assertThat(currencyRepository.count()).isEqualTo(LONG_ONE);
     }
 
     @Test

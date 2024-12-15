@@ -1,21 +1,11 @@
-package co.spribe.test.db.entities;
-
-import jakarta.persistence.*;
+package co.spribe.test.facades.data;
 
 import java.util.Objects;
 
-@Entity
-@Table(name = "exchange_rates")
-public class ExchangeRate extends BaseEntity {
+public class ExchangeRateDTO {
 
-    @Column(nullable = false, length = 3)
     private String base;
-
-    @ManyToOne(optional = false, cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "quote_currency_id", nullable = false)
-    private Currency quote;
-
-    @Column(nullable = false)
+    private String quote;
     private Double rate;
 
     public String getBase() {
@@ -26,11 +16,11 @@ public class ExchangeRate extends BaseEntity {
         this.base = base;
     }
 
-    public Currency getQuote() {
+    public String getQuote() {
         return quote;
     }
 
-    public void setQuote(Currency quote) {
+    public void setQuote(String quote) {
         this.quote = quote;
     }
 
@@ -44,7 +34,7 @@ public class ExchangeRate extends BaseEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), base, quote, rate);
+        return Objects.hash(base, quote, rate);
     }
 
     @Override
@@ -57,9 +47,8 @@ public class ExchangeRate extends BaseEntity {
             return false;
         }
 
-        var exchangeRate = (ExchangeRate) o;
-        return super.equals(exchangeRate) &&
-                Objects.equals(base, exchangeRate.base) &&
+        var exchangeRate = (ExchangeRateDTO) o;
+        return Objects.equals(base, exchangeRate.base) &&
                 Objects.equals(quote, exchangeRate.quote) &&
                 Objects.equals(rate, exchangeRate.rate);
     }
