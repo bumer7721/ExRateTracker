@@ -11,7 +11,7 @@ public class Currency extends BaseEntity {
     @Column(nullable = false, length = 3)
     private String code;
 
-    @Column(nullable = false, length = 50)
+    @Column(length = 50)
     private String name;
 
     public String getName() {
